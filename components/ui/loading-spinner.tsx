@@ -1,5 +1,5 @@
-// Loading Spinner Component
-// A reusable loading indicator with Matrix-style cyan color
+// Enhanced Loading Spinner Component
+// A reusable loading indicator with Matrix-style cyan color and improved animations
 
 import { cn } from "@/lib/utils"
 
@@ -17,7 +17,12 @@ export function LoadingSpinner({ className, size = "md" }: LoadingSpinnerProps) 
 
   return (
     <div className={cn("flex items-center justify-center", className)}>
-      <div className={cn("animate-spin rounded-full border-2 border-gray-600 border-t-cyan-400", sizeClasses[size])} />
+      <div
+        className={cn(
+          "animate-spin rounded-full border-2 border-gray-600 border-t-cyan-400 shadow-lg shadow-cyan-400/20",
+          sizeClasses[size],
+        )}
+      />
     </div>
   )
 }
