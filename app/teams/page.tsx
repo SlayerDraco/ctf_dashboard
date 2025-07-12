@@ -73,7 +73,7 @@ export default function TeamsPage() {
         }))
 
         // Find user's team
-        const currentUserTeam = processedTeams.find((team) => team.members?.some((member) => member.id === user.id))
+        const currentUserTeam = processedTeams.find((team) => team.members?.some((member: { id: string }) => member.id === user.id))
 
         // Fetch CTF configuration
         const { data: configData, error: configError } = await supabase.from("ctf_config").select("*").single()
