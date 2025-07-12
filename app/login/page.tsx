@@ -8,7 +8,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useAuth, signIn, signUp, signInWithProvider, resetPassword } from "@/lib/auth"
+import { useAuth, signIn, signInWithProvider, resetPassword, signUpAndInsertUser } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -52,8 +52,8 @@ export default function LoginPage() {
     try {
       if (isLogin) {
         // Handle login
-        const { error } = await signIn(email, password)
-        if (error) throw error
+        const { error } = await signUpAndInsertUser(email, password, displayName)
+        if (error) throw new Error(error)
 
         router.push("/dashboard")
       } else {
@@ -62,7 +62,7 @@ export default function LoginPage() {
           throw new Error("Display name is required")
         }
 
-        const { error } = await signUp(email, password, displayName)
+       const { error } = await signUpAndInsertUser(email, password, displayName)
         if (error) throw error
 
         setMessage({
